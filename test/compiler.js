@@ -26,7 +26,7 @@ exports['compile expression using model property and function'] = function (test
 };
 
 exports['compile text using model property'] = function (test) {
-	var fn = compiler.compileText('Name: {{ name }}');
+	var fn = compiler.compileText('Name: {{ name }} ');
 	
 	test.ok(fn);
 	test.equal(typeof fn, 'function');
@@ -34,6 +34,6 @@ exports['compile text using model property'] = function (test) {
 	var result = fn({ name: 'Adam' });
 	
 	test.ok(result);
-	test.equal(result, 'Name: Adam');
+	test.equal(result, 'Name: Adam ');
 };
 
