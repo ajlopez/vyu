@@ -24,6 +24,8 @@ exports['associate model to document'] = function (test) {
 	test.equal(model.name, "Adam");
 	test.equal(model.age, 800);
 	
+	document.loaded();
+	
 	var div = document.getElementById('app');
 	
 	test.ok(div);
