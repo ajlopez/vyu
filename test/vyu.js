@@ -35,10 +35,13 @@ exports['associate model to document'] = function (test) {
 	var text = div.childNodes[0];
 	
 	test.equal(text.nodeType, 3);
-	test.equal(text.nodeValue, ' {{ name }} ');
+	test.equal(text.nodeValue, ' Adam ');
 	test.ok(text.vyu);
 	test.ok(text.vyu.fn);
 	test.equal(text.vyu.fn(), " Adam ");
+	
+	model.name = "Eve";
+	test.equal(text.vyu.fn(), " Eve ");
 };
 
 function createDocument(text) {
