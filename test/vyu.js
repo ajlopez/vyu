@@ -27,10 +27,16 @@ exports['associate model to document'] = function (test) {
 	var div = document.getElementById('app');
 	
 	test.ok(div);
-	test.equal(div.childNodes[0].nodeValue, ' {{ name }} ');
-	test.ok(div.vyu);
-	test.ok(div.vyu.fn);
-	test.equal(div.vyu.fn(), " Adam ");
+	test.ok(div.childNodes);
+	test.equal(div.childNodes.length, 1);
+	
+	var text = div.childNodes[0];
+	
+	test.equal(text.nodeType, 3);
+	test.equal(text.nodeValue, ' {{ name }} ');
+	test.ok(text.vyu);
+	test.ok(text.vyu.fn);
+	test.equal(text.vyu.fn(), " Adam ");
 };
 
 function createDocument(text) {
