@@ -2,7 +2,7 @@
 var compiler = require('../lib/compiler');
 
 exports['compile using model property'] = function (test) {
-	var fn = compiler.compile('name');
+	var fn = compiler.compileExpression('name');
 	
 	test.ok(fn);
 	test.equal(typeof fn, 'function');
@@ -14,7 +14,7 @@ exports['compile using model property'] = function (test) {
 };
 
 exports['compile using model property and function'] = function (test) {
-	var fn = compiler.compile('name.toUpperCase()');
+	var fn = compiler.compileExpression('name.toUpperCase()');
 	
 	test.ok(fn);
 	test.equal(typeof fn, 'function');
