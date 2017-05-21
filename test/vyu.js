@@ -42,6 +42,7 @@ exports['associate model to document'] = function (test) {
 	
 	model.name = "Eve";
 	test.equal(text.vyu.fn(), " Eve ");
+	test.equal(text.nodeValue, ' Eve ');
 };
 
 function createDocument(text) {
