@@ -115,11 +115,35 @@ function compileTextNodes(node, viewmodel) {
 	}
 }
 
+var viewmodels = [];
+var loaded = false;
+
+function loadViewModels() {
+	if (loaded)
+		return;
+		
+	loaded = true;
+	
+	viewmodels.forEach(function (viewmodel) {
+		var doc = viewmodel.document;
+		var el = viewmodel.el;
+		
+		if (el && el[0] === '#') {
+			var elem = doc.getElementById(el.substring(1));
+			
+			if (elem)
+				compileTextNodes(elem, viewmodel);
+		}
+	});
+}
+
 function createModel(vm, doc) {
 	doc = doc || document;
 	var viewmodel = { nodes: [] };
 	var mod = model(vm.data, { viewmodel: viewmodel }); 
 	viewmodel.model = mod;
+	viewmodel.document = doc;
+	viewmodel.el = vm.el;
 	
 	viewmodel.refresh = function () {
 		viewmodel.nodes.forEach(function (node) {
@@ -127,20 +151,18 @@ function createModel(vm, doc) {
 		});
 	};
 	
-	if (vm.el && vm.el[0] === '#') 
-		window.addEventListener('load', function () {
-			var elem = doc.getElementById(vm.el.substring(1));
-			
-			if (elem)
-				compileTextNodes(elem, viewmodel);
-		});
+	viewmodels.push(viewmodel);
+	
+	doc.addEventListener('load', loadViewModels);
 	
 	return mod;
 }
 
+if (typeof window === 'object')
+	window.addEventListener('load', loadViewModels);
+
 return {
 	model: createModel
 }
-
 	
 })();
