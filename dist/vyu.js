@@ -128,7 +128,7 @@ function createModel(vm, doc) {
 	};
 	
 	if (vm.el && vm.el[0] === '#') 
-		doc.addEventListener('load', function () {
+		window.addEventListener('load', function () {
 			var elem = doc.getElementById(vm.el.substring(1));
 			
 			if (elem)

@@ -17,6 +17,7 @@ TBD
 ## References
 
 - [Proxy Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy)
+- [Why doesn't document.addEventListener('load', function) work in a greasemonkey script?](https://stackoverflow.com/questions/16404380/why-doesnt-document-addeventlistenerload-function-work-in-a-greasemonkey-s)
 
 ## Samples
 
