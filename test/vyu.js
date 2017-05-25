@@ -45,6 +45,33 @@ exports['associate model to document'] = function (test) {
 	test.equal(text.nodeValue, ' Eve ');
 };
 
+exports['associate model to element property'] = function (test) {
+	var document = createDocument('<div id="app"><h1 v-bind:title="message">Hello</h1></div>');
+	
+	var model = vyu.model({
+		el: "#app",
+		data: function () {
+			return {
+				message: "Hello world"
+			}
+		}
+	},
+	document);
+	
+	test.ok(model);
+	test.equal(model.message, "Hello world");
+	
+	document.loaded();
+	
+	var h1 = document.getElementsByTagName('h1')[0];
+	
+	test.ok(h1);
+	test.equal(h1.getAttribute('title'), "Hello world");
+	
+	model.message = "Hola mundo";
+	test.equal(h1.getAttribute('title'), "Hola mundo");
+};
+
 function createDocument(text) {
 	var document = domie.document();
 	var body = document.getElementsByTagName('body')[0];
@@ -52,3 +79,4 @@ function createDocument(text) {
 	
 	return document;
 }
+
