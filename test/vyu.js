@@ -65,6 +65,7 @@ exports['associate model to element property'] = function (test) {
 	
 	test.ok(h1);
 	test.equal(h1.getAttribute('title'), "Hello world");
+	test.equal(h1.getAttribute('v-bind:title'), null);
 	
 	model.message = "Hola mundo";
 
