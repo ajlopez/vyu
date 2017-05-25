@@ -74,6 +74,62 @@ exports['associate model to element property'] = function (test) {
 	test.equal(h1.getAttribute('title'), "Hola mundo");
 };
 
+exports['using v-if'] = function (test) {
+	var document = createDocument('<div id="app"><h1 v-if="show">Hello</h1><h2>World</h2></div>');
+	
+	test.ok(document.getElementById('app'));
+	
+	var model = vyu.model({
+		el: "#app",
+		data: function () {
+			return {
+				show: true
+			}
+		}
+	},
+	document);
+	
+	test.ok(model);
+	test.ok(model.show);
+	
+	document.loaded();
+	
+	var h1 = document.getElementsByTagName('h1')[0];
+	
+	test.ok(h1);
+	test.equal(h1.innerHTML, 'Hello');
+	test.equal(h1.getAttribute('v-if'), null);
+	
+	var h2 = document.getElementsByTagName('h2')[0];
+	
+	test.ok(h2);
+	test.equal(h2.innerHTML, 'World');
+
+	model.show = false;
+	test.equal(model.show, false);
+	
+	test.equal(document.getElementsByTagName('h1').length, 0);
+	
+	var h2 = document.getElementsByTagName('h2')[0];
+	
+	test.ok(h2);
+	test.equal(h2.innerHTML, 'World');
+
+	model.show = true;
+	test.ok(model.show);
+	
+	var h1 = document.getElementsByTagName('h1')[0];
+	
+	test.ok(h1);
+	test.equal(h1.innerHTML, 'Hello');
+	test.equal(h1.getAttribute('v-if'), null);
+	
+	var h2 = document.getElementsByTagName('h2')[0];
+	
+	test.ok(h2);
+	test.equal(h2.innerHTML, 'World');
+};
+
 function createDocument(text) {
 	var document = domie.document();
 	var body = document.getElementsByTagName('body')[0];
