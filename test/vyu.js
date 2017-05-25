@@ -36,17 +36,15 @@ exports['associate model to document'] = function (test) {
 	
 	test.equal(text.nodeType, 3);
 	test.equal(text.nodeValue, ' Adam ');
-	test.ok(text.vyu);
-	test.ok(text.vyu.fn);
-	test.equal(text.vyu.fn(), " Adam ");
 	
 	model.name = "Eve";
-	test.equal(text.vyu.fn(), " Eve ");
 	test.equal(text.nodeValue, ' Eve ');
 };
 
 exports['associate model to element property'] = function (test) {
 	var document = createDocument('<div id="app"><h1 v-bind:title="message">Hello</h1></div>');
+	
+	test.ok(document.getElementById('app'));
 	
 	var model = vyu.model({
 		el: "#app",
@@ -69,6 +67,9 @@ exports['associate model to element property'] = function (test) {
 	test.equal(h1.getAttribute('title'), "Hello world");
 	
 	model.message = "Hola mundo";
+
+	test.equal(model.message, "Hola mundo");
+	var h1 = document.getElementsByTagName('h1')[0];
 	test.equal(h1.getAttribute('title'), "Hola mundo");
 };
 
