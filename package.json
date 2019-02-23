@@ -22,6 +22,6 @@
   "dependencies": {},
   "devDependencies": {
     "domie": "0.0.3",
-    "simpleunit": "0.0.7"
+    "simpleunit": "0.0.8"
   }
 }
